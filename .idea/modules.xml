@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/servicea.iml" filepath="$PROJECT_DIR$/.idea/servicea.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/SpringEurekaServiceA.iml" filepath="$PROJECT_DIR$/.idea/SpringEurekaServiceA.iml" />
+      <module fileurl="file://$PROJECT_DIR$/servicea/servicea.iml" filepath="$PROJECT_DIR$/servicea/servicea.iml" />
     </modules>
   </component>
 </project>
