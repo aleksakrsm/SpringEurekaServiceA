@@ -10,9 +10,9 @@ import java.util.List;
         url = "/albums",
         accept = MediaType.APPLICATION_JSON_VALUE)
 public interface AlbumsRestClient {
-    record Album(String id, String userId, String title) {}
-
-
     @GetExchange
     List<Album> getAlbums();
+
+    record Album(String id, String userId, String title) {
+    }
 }

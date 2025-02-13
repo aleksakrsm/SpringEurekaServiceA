@@ -21,8 +21,15 @@ public class ClientConfig {
     @Bean
     public Customizer<Resilience4JCircuitBreakerFactory> defaultCustomizer() {
         return factory -> factory.configureDefault(id -> new Resilience4JConfigBuilder(id)
-                .timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(7)).build())
-                .circuitBreakerConfig(CircuitBreakerConfig.ofDefaults())
+                .timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(3)).build())
+                .circuitBreakerConfig(CircuitBreakerConfig.custom()
+                        .failureRateThreshold(50)
+                        .automaticTransitionFromOpenToHalfOpenEnabled(true)
+                        .waitDurationInOpenState(Duration.ofMillis(5000))
+                        .permittedNumberOfCallsInHalfOpenState(2)
+                        .slidingWindowSize(5) /* definše broj poziva koji se uzima kao uzorak za utvrđivanje da li dolazi do otkaza */
+                        .build())
+//                .circuitBreakerConfig(CircuitBreakerConfig.ofDefaults())
                 .build());
     }
 
@@ -34,6 +41,7 @@ public class ClientConfig {
 
         return factory.createClient(AlbumsRestClient.class);
     }
+
     @Bean
     ServiceBClient serviceBClient() {
         RestClient restClient = RestClient.builder().baseUrl("http://localhost:8003/").build();
